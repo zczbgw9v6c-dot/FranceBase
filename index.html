@@ -70,7 +70,21 @@ p{margin:0 0 10px}
 .tab .n{font-size:12px;margin-left:5px;opacity:.6}
 .who{margin-left:auto;display:flex;align-items:center;gap:10px;font-size:13px;color:var(--encre-3)}
 .wrap{max-width:1120px;margin:0 auto;padding:20px 18px}
-#view.sw{animation:swap .34s cubic-bezier(.2,.7,.2,1)}
+#view.sw{animation:swap .42s cubic-bezier(.2,.7,.2,1)}
+#view{transition:opacity .17s ease,transform .17s ease}
+#view.fo{opacity:0;transform:translateY(-4px)}
+.fi{animation:fadein .28s ease}
+@keyframes fadein{from{opacity:0}to{opacity:1}}
+.tiles .tile{animation:riseIn .5s cubic-bezier(.2,.7,.2,1) backwards}
+.tiles .tile:nth-child(1){animation-delay:.02s}.tiles .tile:nth-child(2){animation-delay:.06s}.tiles .tile:nth-child(3){animation-delay:.1s}.tiles .tile:nth-child(4){animation-delay:.14s}
+.tiles .tile:nth-child(5){animation-delay:.18s}.tiles .tile:nth-child(6){animation-delay:.22s}.tiles .tile:nth-child(7){animation-delay:.26s}.tiles .tile:nth-child(8){animation-delay:.3s}
+.card{animation:riseIn .45s cubic-bezier(.2,.7,.2,1) backwards}
+@keyframes riseIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+tbody tr{animation:fadein .35s ease backwards}
+.btn{transition:transform .12s,box-shadow .12s,background .15s,opacity .15s}
+.btn:active{transform:scale(.97)}
+.tab{transition:background .18s,color .18s}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 @keyframes swap{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 
 /* atoms */
@@ -257,6 +271,48 @@ table.mini{width:100%;border-collapse:collapse;font-size:13px} table.mini th{tex
 .cadr{font-size:10.5px;color:var(--vert);font-weight:600;margin-top:2px}
 .lg1,.lg2{display:inline-block;width:10px;height:10px;border-radius:3px;vertical-align:-1px}
 .lg1{background:var(--bleu)} .lg2{background:var(--encre-3);opacity:.45}
+
+/* ---------- mode démo ---------- */
+#demoui{position:fixed;inset:0;z-index:400;pointer-events:none}
+#dspot{position:fixed;border-radius:14px;box-shadow:0 0 0 9999px rgba(13,27,51,.58),0 0 0 3px rgba(255,255,255,.9),0 0 40px rgba(31,94,232,.45);transition:top .55s cubic-bezier(.2,.7,.2,1),left .55s cubic-bezier(.2,.7,.2,1),width .55s cubic-bezier(.2,.7,.2,1),height .55s cubic-bezier(.2,.7,.2,1),opacity .3s;opacity:0;pointer-events:none}
+#dcur{position:fixed;top:0;left:0;transform:translate(-100px,-100px);transition:transform .7s cubic-bezier(.2,.7,.2,1),opacity .3s;opacity:0;filter:drop-shadow(0 4px 8px rgba(0,0,0,.35));pointer-events:none;z-index:2}
+#dcur svg{transform-origin:20% 15%;animation:dbob 1.6s ease-in-out infinite}
+#dcur.clk svg{animation:dclick .26s ease}
+@keyframes dbob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@keyframes dclick{0%{transform:scale(1)}40%{transform:scale(.72)}100%{transform:scale(1)}}
+#dcard{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom));transform:translateX(-50%);width:min(500px,calc(100% - 24px));background:var(--carte);border:1px solid var(--trait);border-radius:16px;padding:16px 18px 14px;box-shadow:0 18px 50px rgba(13,27,51,.35);pointer-events:auto;z-index:3}
+#dcard.in{animation:dcin .45s cubic-bezier(.2,.7,.2,1)}
+@keyframes dcin{from{opacity:0;transform:translate(-50%,14px)}to{opacity:1;transform:translate(-50%,0)}}
+#dcard .dtop{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--bleu);font-weight:700;margin-bottom:4px}
+#dcard .dlbl{margin-left:auto;background:var(--bleu);color:#fff;border-radius:999px;padding:2px 9px;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase}
+#dcard h3{font-size:17px;margin:0 0 6px}
+#dcard p{font-size:14px;line-height:1.45;color:var(--encre-2);margin:0 0 10px}
+#dcard .dprog{height:3px;background:var(--fond);border-radius:2px;overflow:hidden;margin-bottom:12px}
+#dcard .dprog i{display:block;height:100%;width:0;background:var(--bleu)}
+#dcard.paused .dprog i{opacity:.4}
+#dcard .dbtns{display:flex;gap:8px;align-items:center}
+body.demo-on{overflow-x:hidden}
+body.demo-on .tour{display:none}
+@media (max-width:700px){#dcard{padding:14px 14px 12px}#dcard h3{font-size:15.5px}#dcard p{font-size:13.5px}}
+/* ---------- information CEE ---------- */
+.egrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;margin-top:10px}
+.ecard{text-align:left;background:var(--carte);border:1px solid var(--trait);border-radius:14px;padding:14px 16px;cursor:pointer;transition:transform .15s,box-shadow .15s,border-color .15s;font-family:inherit;color:inherit}
+.ecard:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(13,27,51,.09);border-color:#C5CEE8}
+.ecode{font-weight:700;font-size:13px;color:var(--bleu-fonce);letter-spacing:.02em}
+.etit{font-size:14px;font-weight:600;margin-top:4px;line-height:1.3}
+#elig .ovl{z-index:85}
+.everdict{display:flex;flex-direction:column;gap:2px;border-radius:10px;padding:10px 14px;margin:6px 0 4px;border:1px solid var(--trait);background:var(--fond)}
+.everdict b{font-size:15px} .everdict span{font-size:12.5px;color:var(--encre-2)}
+.everdict.v{background:var(--vert-pale);border-color:#CDE4DA} .everdict.v b{color:var(--vert)}
+.everdict.a{background:var(--ambre-pale);border-color:var(--ambre-trait)} .everdict.a b{color:var(--ambre)}
+.everdict.r{background:var(--rouge-pale);border-color:#E8C9C4} .everdict.r b{color:var(--rouge)}
+.eq{padding:10px 12px;border:1px solid var(--trait);border-left:3px solid var(--trait);border-radius:8px;margin-bottom:8px;background:#fff}
+.eq.ok{border-left-color:var(--vert)} .eq.ko{border-left-color:var(--rouge);background:var(--rouge-pale)}
+.eqt{font-size:14px;font-weight:500;line-height:1.35}
+.ed{margin-bottom:8px} .ed input{width:100%}
+.tnever{display:flex;align-items:center;gap:8px;margin-top:12px;font-size:12.5px;color:var(--encre-2);cursor:pointer;user-select:none}
+.tnever input{width:16px;height:16px;accent-color:var(--bleu);margin:0;flex:none}
+@media (max-width:700px){.egrid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -586,7 +642,7 @@ const FICHES=[
 ["BAR-TH-141","Climatiseur performant (France d’outre-mer)","dom"],
 ["BAR-TH-159","Pompe à chaleur hybride individuelle","tous"],
 ["BAR-TH-162","PVT eau : capteurs photovoltaïques + thermiques","tous"],
-["BAR-TH-168","Dispositif solaire thermique – Métropole","metropole"],
+["BAR-TH-168","Dispositif solaire thermique : SSC ou chauffe-eau solaire sur appoint séparé (maison, métropole)","metropole"],
 ["BAR-TH-172","PAC eau/eau ou sol/eau","tous"],
 ["BAR-TH-178","Système géothermique collectif","tous"],
 ["BAT-EN-109","Réduction des apports solaires par la toiture — Outre-mer","dom"],
@@ -728,7 +784,7 @@ function nomClient(f){return f.raison_sociale||[f.prenom,f.nom].filter(Boolean).
 function qualite(f){return (f.tel?2:0)+(f.raison_sociale?1:0)+(f.cp?1:0)+(f.naf?3:0)+(f.siret?2:0)+(f.siren?1:0);}
 
 const TRANCHE=300;
-function compact(f){const o={};for(const k in f){if(k==='_h'||k==='_dirty'||k==='_hay'||k==='_k')continue;if(k[0]==='_'&&k!=='_upd'&&k!=='_par')continue;const v=f[k];if(v===''||v===null||v===undefined||(Array.isArray(v)&&!v.length))continue;o[k]=v;}return o;}
+function compact(f){const o={};for(const k in f){if(k==='_h'||k==='_dirty'||k==='_hay'||k==='_k'||k==='_nk'||k==='_qk')continue;if(k[0]==='_'&&k!=='_upd'&&k!=='_par')continue;const v=f[k];if(v===''||v===null||v===undefined||(Array.isArray(v)&&!v.length))continue;o[k]=v;}return o;}
 function depuisDATA(){
   return DATA.map((row,i)=>{
     const o={id:'d'+i,statut:'Non traité',suivi:[],naf:'',naf_lib:'',enrichi:''};
@@ -781,6 +837,7 @@ let saveErr=false;
 function marquer(f){f._upd=new Date().toISOString();f._par=(user&&user.nom)||'';}
 function bandeauSauvegarde(ok){const b=document.getElementById('gsave');if(b)b.style.display=ok?'none':'';}
 async function save(){
+  if(user&&user.role==='demo')return;
   try{
     fiches.forEach(f=>{delete f._hay;const j=JSON.stringify(compact(f));if(f._h!==j){f._h=j;marquer(f);f._dirty=true;}});
     const mod=fiches.filter(modifiee).map(compact);
@@ -808,7 +865,9 @@ function gate(){
     <div class="field"><label class="f">Identifiant</label><input type="text" id="gl" placeholder="FB-000" autocapitalize="characters"></div>
     <div class="field"><label class="f">Mot de passe</label><input type="password" id="gp"></div>
     <button class="btn w" id="gb">Se connecter</button><div class="gerr" id="ge"></div>
+    <div style="text-align:center;margin-top:14px"><span id="gdemo" class="sm" style="color:var(--bleu);cursor:pointer;text-decoration:underline">▶ Voir la démo animée sans se connecter</span></div>
   </div></div>`;
+  const gd=document.getElementById('gdemo');if(gd)gd.onclick=async()=>{user={login:'DEMO',nom:'Visiteur',role:'demo'};const g=document.getElementById('gate');g.classList.add('out');await new Promise(r=>setTimeout(r,320));enter(true);setTimeout(()=>Demo.start(),500);};
   const go=async()=>{
     const btn=document.getElementById('gb');if(btn.disabled)return;
     const l=document.getElementById('gl').value.trim().toLowerCase(),p=document.getElementById('gp').value;
@@ -831,27 +890,43 @@ function gate(){
   g.querySelectorAll('input').forEach(i=>i.onkeydown=e=>{if(e.key==='Enter')go();});
   setTimeout(()=>{const i=document.getElementById('gl');if(i&&window.innerWidth>700)i.focus();},60);
 }
+function prechauffer(){
+  let k=0;const pas=()=>{const fin=Math.min(fiches.length,k+1500);for(;k<fin;k++){const f=fiches[k];if(!f._hay)f._hay=norm([nomClient(f),f.nom,f.prenom,f.raison_sociale,f.siren,f.siret,f.tel,f.ville,f.cp,f.dept,f.secteur,f.naf,f.adresse,f.email,f.chauffage,f.projet,f.annotation].join(' '));if(f._qk===undefined)f._qk=qualite(f);}
+    if(k<fiches.length)setTimeout(pas,40);};
+  setTimeout(pas,600);
+}
 function enter(anim){
   const g=document.getElementById('gate'),app=document.getElementById('app');
   g.innerHTML='';g.classList.remove('out');
   document.getElementById('whoN').textContent=user.nom;
-  view='tableau';render();
-  try{if(!localStorage.getItem(KT))setTimeout(startTour,anim?900:500);}catch(e){}
+  view='tableau';render();prechauffer();
+  tourAuto(anim);
   if(anim){app.classList.add('in');app.style.display='';requestAnimationFrame(()=>requestAnimationFrame(()=>app.classList.remove('in')));}
   else app.style.display='';
 }
 function gateOut(){const app=document.getElementById('app');app.classList.add('in');setTimeout(()=>{app.style.display='none';app.classList.remove('in');gate();},450);}
 
 /* ---------- navigation ---------- */
+let _renderTok=0;
 function render(){
   const T=[['tableau','Tableau de bord'],['base','Base clients'],['enrich','Enrichissement']];
   document.getElementById('tabs').innerHTML=T.map(([v,l])=>`<button class="tab ${view===v?'on':''}" data-v="${v}">${l}${v==='base'?'<span class="n">'+fiches.length+'</span>':''}</button>`).join('');
-  document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{view=t.dataset.v;render();});
+  document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{if(view!==t.dataset.v){view=t.dataset.v;render();}});
   const el=document.getElementById('view');
-  el.innerHTML=({tableau:vTableau,base:vBase,enrich:vEnrich,apropos:vApropos,aide:vAide})[view]();
-  if(render.last!==view){el.classList.remove('sw');void el.offsetWidth;el.classList.add('sw');window.scrollTo({top:0});}
-  render.last=view;bind();
+  const V=({tableau:vTableau,base:vBase,enrich:vEnrich,infocee:vInfoCee,apropos:vApropos,aide:vAide});
+  const change=render.last!==undefined&&render.last!==view;
+  if(change&&!_reduit()){
+    const tok=++_renderTok;el.classList.add('fo');
+    setTimeout(()=>{if(tok!==_renderTok)return;el.innerHTML=V[view]();el.classList.remove('fo');el.classList.remove('sw');void el.offsetWidth;el.classList.add('sw');window.scrollTo({top:0});bind();},170);
+  }else{
+    el.innerHTML=V[view]();
+    if(change){el.classList.remove('sw');void el.offsetWidth;el.classList.add('sw');window.scrollTo({top:0});}
+    bind();
+  }
+  render.last=view;
 }
+const _reduit=()=>window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const renderPret=()=>new Promise(r=>setTimeout(r,_reduit()?0:200));
 
 /* ---------- tableau de bord ---------- */
 function vTableau(){
@@ -998,52 +1073,26 @@ function filtrer(){
     return true;
   });
 }
-function vBase(){
-  const list=filtrer();
-  const K2={client:f=>norm(nomClient(f)),lieu:f=>(f.territoire||'')+(f.ville||''),sect:f=>f.secteur||'~',fiche:f=>f.fiche_origine||'~',type:f=>f.type_lead||'',
-    stat:f=>f.statut||'',qualite:f=>qualite(f)};
+let _listes=null,_listesN=-1;
+function listesFiltres(){
+  if(_listes&&_listesN===fiches.length)return _listes;
+  const S=new Set(),T=new Set(),R=new Set(),F=new Set();
+  fiches.forEach(f=>{if(f.secteur)S.add(f.secteur);if(f.territoire)T.add(f.territoire);const src=(f.source||'').split(' + ')[0];if(src)R.add(src);(f.ops||[]).forEach(o=>{if(o.fiche)F.add(o.fiche);});});
+  _listesN=fiches.length;return _listes={secteurs:[...S].sort(),terrs:[...T].sort(),srcs:[...R].sort(),fichesInst:[...F].sort()};
+}
+function trier(list){
+  const K2={client:f=>f._nk||(f._nk=norm(nomClient(f))),lieu:f=>(f.territoire||'')+(f.ville||''),sect:f=>f.secteur||'~',fiche:f=>f.fiche_origine||'~',type:f=>f.type_lead||'',
+    stat:f=>f.statut||'',qualite:f=>f._qk===undefined?(f._qk=qualite(f)):f._qk};
   const kf=K2[sortKey]||K2.qualite;
-  list.sort((a,b)=>{const x=kf(a),y=kf(b);return (x<y?-1:x>y?1:0)*sortDir;});
+  const dec=list.map(f=>[kf(f),f]);
+  dec.sort((a,b)=>{const x=a[0],y=b[0];return (x<y?-1:x>y?1:0)*sortDir;});
+  return dec.map(d=>d[1]);
+}
+function vListe(list){
   const page=list.slice(0,pageN);
-  const secteurs=[...new Set(fiches.map(f=>f.secteur).filter(Boolean))].sort();
-  const terrs=[...new Set(fiches.map(f=>f.territoire).filter(Boolean))].sort();
-  const srcs=[...new Set(fiches.map(f=>(f.source||'').split(' + ')[0]).filter(Boolean))].sort();
-  const fichesInst=[...new Set(fiches.flatMap(f=>(f.ops||[]).map(o=>o.fiche)).filter(Boolean))].sort();
-  const th=(k,l)=>`<th data-sort="${k}" class="${sortKey===k?'s':''}">${l}${sortKey===k?(sortDir>0?' ↑':' ↓'):''}</th>`;
   const mobile=window.matchMedia('(max-width:700px)').matches;
-
+  const th=(k,l)=>`<th data-sort="${k}" class="${sortKey===k?'s':''}">${l}${sortKey===k?(sortDir>0?' ↑':' ↓'):''}</th>`;
   return `
-  <div class="card" style="margin-bottom:14px">
-    <div class="secth" style="margin:0 0 10px"><h2>Filtres</h2><span>combinez-les, retirez-les un par un</span></div>
-    <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end">
-      <div style="flex:2;min-width:200px"><label class="f">Rechercher</label><input type="text" id="q" value="${esc(q)}" placeholder="Nom, téléphone, e-mail, ville, code postal, annotation…"></div>
-      <div style="min-width:170px"><label class="f">Secteur</label><select id="fs"><option value="">Tous</option>${secteurs.map(s=>`<option ${fSect===s?'selected':''}>${esc(s)}</option>`).join('')}</select></div>
-      <div style="min-width:130px"><label class="f">Territoire</label><select id="fz"><option value="Métropole" ${fZone==='Métropole'?'selected':''}>Métropole</option><option value="DOM-TOM" ${fZone==='DOM-TOM'?'selected':''}>DOM-TOM</option><option value="" ${!fZone?'selected':''}>Tous</option></select></div>
-      <div style="min-width:140px"><label class="f">Région</label><select id="ft"><option value="">Tous</option>${terrs.map(s=>`<option ${fTerr===s?'selected':''}>${esc(s)}</option>`).join('')}</select></div>
-      <div style="min-width:150px"><label class="f">Suivi</label><select id="fst"><option value="">Tous</option>${STATUTS.map(s=>`<option ${fStat===s?'selected':''}>${s}</option>`).join('')}</select></div>
-      <div style="min-width:150px"><label class="f">Fiche installée</label><select id="ffi"><option value="">Toutes</option>${fichesInst.map(c=>`<option value="${c}" ${fFiche===c?'selected':''}>${c} — ${esc(ficheTitre(c)).slice(0,32)}</option>`).join('')}</select></div>
-      <div style="min-width:140px"><label class="f">Statut</label><select id="fty"><option value="">Tous</option>${TYPES.map(t=>`<option ${fType===t?'selected':''}>${t}</option>`).join('')}</select></div>
-      <div style="min-width:150px"><label class="f">Source</label><select id="fsr"><option value="">Toutes</option>${srcs.map(s=>`<option ${fSrc===s?'selected':''}>${esc(s)}</option>`).join('')}</select></div>
-      <button class="btn g sm" id="fimp">Importer un fichier</button>
-      <button class="btn g sm" id="fexp">Exporter</button>
-    </div>
-    <div id="impzone"></div>
-    ${(()=>{const act=[];
-      if(q)act.push(['q','Recherche : '+q]);
-      if(fZone!=='Métropole')act.push(['zone','Territoire : '+(fZone||'tous')]);
-      if(fSect)act.push(['sect','Secteur : '+fSect]);
-      if(fTerr)act.push(['terr','Région : '+fTerr]);
-      if(fFiche)act.push(['fiche','Fiche : '+fFiche]);
-      if(fType)act.push(['type','Statut : '+fType]);
-      if(fStat)act.push(['stat','Suivi : '+fStat]);
-      if(fSrc)act.push(['src','Source : '+fSrc]);
-      if(fVisee)act.push(['visee','Fiche proposée : '+fVisee]);
-      if(fChauf)act.push(['chauf','Chauffage : '+fChauf]);
-      if(fAnn)act.push(['ann','Annotation : '+fAnn]);
-      if(fEnr)act.push(['enr',({tel:'Avec téléphone',mail:'Avec adresse mail',soc:'Avec société',sect:'Secteur connu',naf:'NAF connu',sansnaf:'Sans NAF',rappel:'Appels à passer'})[fEnr]]);
-      return act.length?`<div class="chips" style="margin-top:12px;align-items:center"><span class="xs mut">Actifs :</span>${act.map(([k,l])=>`<span class="chip on">${esc(l)} <span data-rm="${k}" style="cursor:pointer;margin-left:5px;opacity:.75">×</span></span>`).join('')}<button class="btn g sm" id="fclear">Tout effacer</button></div>`:'';})()}
-  </div>
-
   ${sel.size?`<div class="card" style="margin-bottom:10px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;background:var(--encre);color:#fff;border:0">
     <b class="sm">${sel.size} sélectionnée${sel.size>1?'s':''}</b>
     <select id="bulk" style="width:auto;padding:5px 8px"><option value="">Changer le statut…</option>${STATUTS.map(s=>`<option>${s}</option>`).join('')}</select>
@@ -1072,6 +1121,50 @@ function vBase(){
       <td><span class="tag ${typeCls(f.type_lead)}">${esc(f.type_lead||'Non installé')}</span>${f.statut&&f.statut!=='Non traité'?`<div class="sub">${esc(f.statut)}${f.fiche_visee?' · '+esc(f.fiche_visee):''}${f.rappel?' · '+rappelTxt(f.rappel):''}</div>`:''}</td>
     </tr>`).join('')}</tbody></table>
     ${list.length>pageN?`<div class="more"><button class="btn g sm" id="bmore">Afficher ${Math.min(60,list.length-pageN)} de plus (${list.length-pageN} restantes)</button></div>`:''}</div>`}`;
+}
+function chipsActifs(){return (()=>{const act=[];
+      if(q)act.push(['q','Recherche : '+q]);
+      if(fZone!=='Métropole')act.push(['zone','Territoire : '+(fZone||'tous')]);
+      if(fSect)act.push(['sect','Secteur : '+fSect]);
+      if(fTerr)act.push(['terr','Région : '+fTerr]);
+      if(fFiche)act.push(['fiche','Fiche : '+fFiche]);
+      if(fType)act.push(['type','Statut : '+fType]);
+      if(fStat)act.push(['stat','Suivi : '+fStat]);
+      if(fSrc)act.push(['src','Source : '+fSrc]);
+      if(fVisee)act.push(['visee','Fiche proposée : '+fVisee]);
+      if(fChauf)act.push(['chauf','Chauffage : '+fChauf]);
+      if(fAnn)act.push(['ann','Annotation : '+fAnn]);
+      if(fEnr)act.push(['enr',({tel:'Avec téléphone',mail:'Avec adresse mail',soc:'Avec société',sect:'Secteur connu',naf:'NAF connu',sansnaf:'Sans NAF',rappel:'Appels à passer'})[fEnr]]);
+      return act.length?`<div class="chips" style="margin-top:12px;align-items:center"><span class="xs mut">Actifs :</span>${act.map(([k,l])=>`<span class="chip on">${esc(l)} <span data-rm="${k}" style="cursor:pointer;margin-left:5px;opacity:.75">×</span></span>`).join('')}<button class="btn g sm" id="fclear">Tout effacer</button></div>`:'';})();}
+function renderListe(){
+  const el=document.getElementById('bliste');if(!el){render();return;}
+  el.innerHTML=vListe(trier(filtrer()));const c=document.getElementById('bchips');if(c)c.innerHTML=chipsActifs();el.classList.remove('fi');void el.offsetWidth;el.classList.add('fi');bind(true);
+}
+function vBase(){
+  const list=trier(filtrer());
+  const {secteurs,terrs,srcs,fichesInst}=listesFiltres();
+
+
+  return `
+  <div class="card" style="margin-bottom:14px">
+    <div class="secth" style="margin:0 0 10px"><h2>Filtres</h2><span>combinez-les, retirez-les un par un</span></div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end">
+      <div style="flex:2;min-width:200px"><label class="f">Rechercher</label><input type="text" id="q" value="${esc(q)}" placeholder="Nom, téléphone, e-mail, ville, code postal, annotation…"></div>
+      <div style="min-width:170px"><label class="f">Secteur</label><select id="fs"><option value="">Tous</option>${secteurs.map(s=>`<option ${fSect===s?'selected':''}>${esc(s)}</option>`).join('')}</select></div>
+      <div style="min-width:130px"><label class="f">Territoire</label><select id="fz"><option value="Métropole" ${fZone==='Métropole'?'selected':''}>Métropole</option><option value="DOM-TOM" ${fZone==='DOM-TOM'?'selected':''}>DOM-TOM</option><option value="" ${!fZone?'selected':''}>Tous</option></select></div>
+      <div style="min-width:140px"><label class="f">Région</label><select id="ft"><option value="">Tous</option>${terrs.map(s=>`<option ${fTerr===s?'selected':''}>${esc(s)}</option>`).join('')}</select></div>
+      <div style="min-width:150px"><label class="f">Suivi</label><select id="fst"><option value="">Tous</option>${STATUTS.map(s=>`<option ${fStat===s?'selected':''}>${s}</option>`).join('')}</select></div>
+      <div style="min-width:150px"><label class="f">Fiche installée</label><select id="ffi"><option value="">Toutes</option>${fichesInst.map(c=>`<option value="${c}" ${fFiche===c?'selected':''}>${c} — ${esc(ficheTitre(c)).slice(0,32)}</option>`).join('')}</select></div>
+      <div style="min-width:140px"><label class="f">Statut</label><select id="fty"><option value="">Tous</option>${TYPES.map(t=>`<option ${fType===t?'selected':''}>${t}</option>`).join('')}</select></div>
+      <div style="min-width:150px"><label class="f">Source</label><select id="fsr"><option value="">Toutes</option>${srcs.map(s=>`<option ${fSrc===s?'selected':''}>${esc(s)}</option>`).join('')}</select></div>
+      <button class="btn g sm" id="fimp">Importer un fichier</button>
+      <button class="btn g sm" id="fexp">Exporter</button>
+    </div>
+    <div id="impzone"></div>
+    <div id="bchips">${chipsActifs()}</div>
+  </div>
+
+  <div id="bliste" class="fi">${vListe(list)}</div>`;
 }
 
 /* ---------- fiche client ---------- */
@@ -1143,7 +1236,7 @@ function detail(id){
     <section class="sec"><div class="sech"><h3>Suivi commercial</h3></div>
       <div class="cols" style="margin-bottom:10px">
         <div><label class="f">Résultat de l'appel</label><select id="dst">${STATUTS.map(s=>`<option ${(f.statut||'Non traité')===s?'selected':''}>${s}</option>`).join('')}</select></div>
-        <div><label class="f">Fiche CEE proposée</label><select id="dfv"><option value="">— aucune —</option>${FICHES_TOUTES.map(x=>`<option value="${x[0]}" ${f.fiche_visee===x[0]?'selected':''}>${x[0]} — ${esc(x[1]).slice(0,38)}</option>`).join('')}</select></div>
+        <div><label class="f">Fiche CEE proposée</label><select id="dfv"><option value="">— aucune —</option>${optFiches(f.fiche_visee,38)}</select><button class="btn g sm" id="delig" style="margin-top:6px;width:100%">Questions d'éligibilité</button></div>
       </div>
       <label class="f">Prochain appel</label>
       <div class="chips" style="margin-bottom:8px">
@@ -1168,6 +1261,7 @@ function detail(id){
   m.querySelectorAll('[data-rap]').forEach(c=>c.onclick=()=>{const d=+c.dataset.rap;const el=document.getElementById('drap');if(!d){el.value='';}else{const x=new Date();x.setDate(x.getDate()+d);el.value=x.toISOString().slice(0,10);}document.getElementById('draplbl').textContent=el.value?rappelTxt(el.value):'Aucune date fixée';});
   const dr=document.getElementById('drap');if(dr)dr.onchange=()=>{document.getElementById('draplbl').textContent=dr.value?rappelTxt(dr.value):'Aucune date fixée';};
   on('dedit',()=>formCoord(id));
+  on('delig',()=>{const c=document.getElementById('dfv').value;if(!c){toast('Choisissez d\'abord la fiche CEE proposée');return;}if(!ELIG_MAP[c]){toast('Pas encore de questionnaire pour '+c+' — voir Information CEE');return;}openElig(c,id);});
   on('bAddOp',()=>formOp(id));
   m.querySelectorAll('[data-adel]').forEach(el=>el.onclick=async()=>{f.autres.splice(+el.dataset.adel,1);await save();detail(id);});
   m.querySelectorAll('[data-opdel]').forEach(el=>el.onclick=async()=>{if(!confirm('Retirer cette opération ?'))return;f.ops.splice(+el.dataset.opdel,1);recalc(f);await save();detail(id);});
@@ -1207,7 +1301,7 @@ function formOp(id){
   const f=fiches.find(x=>x.id===id);const m=document.getElementById('modal');
   m.innerHTML=`<div class="ovl" id="ovl"><div class="pane" onclick="event.stopPropagation()">
     <header><h2>Ajouter une opération</h2><button class="x" id="cx" style="margin-left:auto">×</button></header>
-    <div class="field"><label class="f">Fiche CEE</label><select id="o_fiche">${FICHES_TOUTES.map(x=>`<option value="${x[0]}">${x[0]} — ${esc(x[1]).slice(0,44)}</option>`).join('')}</select></div>
+    <div class="field"><label class="f">Fiche CEE</label><select id="o_fiche">${optFiches('',44)}</select></div>
     <div class="cols"><div class="field"><label class="f">Statut</label><select id="o_statut">${TYPES.filter(t=>t!=='Non installé').map(t=>`<option>${t}</option>`).join('')}</select></div>
       <div class="field"><label class="f">Date</label><input type="date" id="o_date"></div></div>
     <div class="cols"><div class="field"><label class="f">Quantité</label><input type="text" id="o_q"></div><div class="field"><label class="f">Unité</label><select id="o_u"><option>luminaires</option><option>vélos</option><option>m²</option><option>kW</option><option>unités</option></select></div></div>
@@ -1454,7 +1548,7 @@ const Serveur=(()=>{
     }catch(e){etat='err';throw e;}finally{majBadge();}
   }
   async function pousserBrut(tout){
-    if(!cfg)return 0;
+    if(!cfg||(user&&user.role==='demo'))return 0;
     if(!tout){try{await tirerBrut();}catch(e){}}
     const touchee=f=>f._dirty||(f.suivi&&f.suivi.length)||(f.vus&&f.vus.length)||(f.statut&&f.statut!=='Non traité')||f.rappel||f.source==='Saisie manuelle'||(f.source||'').startsWith('Import');
     const lot=fiches.filter(f=>tout?touchee(f):f._dirty);if(!lot.length){etat='ok';majBadge();return 0;}
@@ -1573,7 +1667,7 @@ function formClient(){
     <div class="cols"><div class="field"><label class="f">Code postal</label><input type="text" id="n_cp" inputmode="numeric"></div><div class="field"><label class="f">Ville</label><input type="text" id="n_ville"></div></div>
     <div class="cols"><div class="field"><label class="f">Mode de chauffage</label><select id="n_chauf"><option value="">— inconnu —</option><option>fioul</option><option>gaz</option><option>électrique</option><option>bois</option><option>granulés</option><option>PAC</option><option>autre</option></select></div>
       <div class="field"><label class="f">Statut</label><select id="n_type"><option value="Prospect">Prospect</option><option value="Client installé">Installé</option><option value="Fichier acheté">Non installé</option></select></div></div>
-    <div class="cols"><div class="field"><label class="f">Fiche CEE installée ou visée</label><select id="n_fiche"><option value="">— aucune —</option>${FICHES_TOUTES.map(x=>`<option value="${x[0]}">${x[0]} — ${esc(x[1]).slice(0,40)}</option>`).join('')}</select></div>
+    <div class="cols"><div class="field"><label class="f">Fiche CEE installée ou visée</label><select id="n_fiche"><option value="">— aucune —</option>${optFiches('',40)}</select></div>
       <div class="field"><label class="f">Annotation</label><input type="text" id="n_ann" placeholder="commentaire, résultat…"></div></div>
     <div class="field"><label class="f">Source</label><input type="text" id="n_src" value="Saisie manuelle"></div>
     <details style="margin:4px 0 10px"><summary class="sm" style="cursor:pointer;color:var(--encre-2)">Entreprise (facultatif) — si le client est une société</summary>
@@ -1645,7 +1739,7 @@ function drawMap(){
   z.innerHTML=`<div class="sm" style="margin:12px 0 6px"><b>${esc(parsed.name)}</b>${parsed.feuilles.length>1?` — feuille <select id="isheet" style="width:auto;padding:4px 8px">${parsed.feuilles.map((f,i)=>`<option value="${i}" ${i===parsed.i?'selected':''}>${esc(f.n)} (${f.rows.length})</option>`).join('')}</select>`:''} — ${fe.rows.length} lignes. Vérifiez la correspondance des colonnes.</div>
     ${IMP_FIELDS.map(([k,l])=>`<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:center;padding:5px 0;border-bottom:1px solid #F0F2F8"><span class="sm">${l}</span><select data-m="${k}"><option value="">— ignorer —</option>${headers.map(h=>`<option ${parsed.map[k]===h?'selected':''}>${esc(h)}</option>`).join('')}</select></div>`).join('')}
     <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;margin-top:12px">
-      <div style="flex:1;min-width:200px"><label class="f">Fiche CEE installée par défaut</label><select id="idfiche"><option value="">— aucune —</option>${FICHES_TOUTES.map(x=>`<option value="${x[0]}">${x[0]} — ${esc(x[1]).slice(0,40)}</option>`).join('')}</select></div>
+      <div style="flex:1;min-width:200px"><label class="f">Fiche CEE installée par défaut</label><select id="idfiche"><option value="">— aucune —</option>${optFiches('',40)}</select></div>
       <div style="min-width:160px"><label class="f">Statut</label><select id="idtype"><option value="Prospect">Prospect</option><option value="Client installé">Installé</option><option value="Fichier acheté">Non installé</option></select></div>
       <div style="min-width:160px"><label class="f">Nom de la source</label><input type="text" id="idsrc" value="${esc(fe.n)}"></div>
       <button class="btn" id="irun">Importer ${fe.rows.length} lignes</button></div>`;
@@ -1693,6 +1787,179 @@ function exportXLSX(rows,nom){
   XLSX.writeFile(wb,nom||'francebase.xlsx');
 }
 
+/* ---------- fiches à travailler (liste courte, en tête de chaque menu déroulant) ---------- */
+const FICHES_TRAVAIL=['RES-EC-104','BAT-EQ-127','BAR-TH-171','AGRI-EQ-110','TRA-SE-104','IND-UT-137','BAR-TH-168','BAR-EN-101','BAR-EN-102','BAR-EN-103'];
+const ficheLigne=(x,n)=>x[0]+' — '+esc(x[1]).slice(0,n||40);
+function optFiches(sel,n){
+  const T=FICHES_TRAVAIL.map(c=>FICHES_TOUTES.find(x=>x[0]===c)).filter(Boolean);
+  const A=FICHES_TOUTES.filter(x=>!FICHES_TRAVAIL.includes(x[0])).slice().sort((a,b)=>a[0].localeCompare(b[0]));
+  const o=x=>`<option value="${x[0]}" ${sel===x[0]?'selected':''}>${ficheLigne(x,n)}</option>`;
+  return `<optgroup label="Fiches à travailler">${T.map(o).join('')}</optgroup><optgroup label="Toutes les fiches">${A.map(o).join('')}</optgroup>`;
+}
+
+/* ---------- Information CEE : questions d'éligibilité, sans chiffre, pour qualifier vite ----------
+   q : questions bloquantes (réponse attendue "oui" ou "non") · d : questions de découverte (à noter)
+   prov : version provisoire à recaler sur la fiche officielle (PDF à venir) */
+const ELIG_COMMUN=[
+  {t:"Les travaux n'ont pas commencé : aucun devis signé, aucune commande passée, aucun acompte versé ?",ok:"oui",aide:"Un devis déjà signé ou des travaux démarrés rendent l'opération irrécupérable. C'est la première chose à vérifier."},
+  {t:"L'interlocuteur est-il décisionnaire (propriétaire, gérant, syndic, élu) ou peut-il obtenir l'accord du propriétaire ?",ok:"oui",aide:"Un locataire, un salarié ou un occupant sans mandat ne peut pas engager les travaux seul."}
+];
+const ELIG=[
+ {code:"RES-EC-104",prov:true,secteur:"Entreprises, collectivités, copropriétés, exploitations",
+  intro:"Remplacement de luminaires extérieurs existants (parking, voirie privée, abords de site) par des luminaires LED performants. C'est une rénovation : il faut un éclairage déjà en place.",
+  q:[
+   {t:"Le site possède-t-il des luminaires extérieurs déjà installés et en fonctionnement (mâts, candélabres, appliques extérieures) ?",ok:"oui",aide:"La fiche ne couvre pas la création d'un éclairage neuf, seulement le remplacement d'un existant."},
+   {t:"Les luminaires actuels sont-ils encore en sodium, iodure métallique, mercure, halogène ou fluo (pas déjà passés en LED) ?",ok:"oui",aide:"Si tout est déjà en LED récent, il n'y a rien à rénover."},
+   {t:"S'agit-il bien d'un éclairage extérieur (hors intérieur de bâtiment et hors terrain de sport) ?",ok:"oui",aide:"Les luminaires intérieurs et les éclairages sportifs relèvent d'autres fiches."},
+   {t:"L'éclairage est-il utilisé régulièrement (allumé chaque nuit ou chaque soir) ?",ok:"oui",aide:"Un éclairage rarement allumé n'a pas d'intérêt pour le client ni pour le dossier."}
+  ],
+  d:["Nombre de points lumineux à remplacer (approximatif)","Type de site : parking, voirie, quai, cour, zone de stockage…","Puissance ou type des lampes actuelles si connu","Hauteur des mâts / accès nacelle possible","Qui gère l'éclairage : propriétaire, gestionnaire, mairie, syndic"]},
+ {code:"TRA-SE-104",prov:true,secteur:"Transporteurs, loueurs, flottes d'entreprise, garages, stations",
+  intro:"Mise en place d'une station de gonflage automatique des pneumatiques sur un site où stationne une flotte de véhicules. Un pneu bien gonflé consomme moins : c'est l'esprit de la fiche.",
+  q:[
+   {t:"Le prospect exploite-t-il une flotte de véhicules (utilitaires, camions, autocars, voitures de service) qui passe régulièrement sur son site ?",ok:"oui",aide:"La fiche vise les gestionnaires de flotte : sans véhicules réguliers, pas d'opération."},
+   {t:"Le site dispose-t-il d'un parking, dépôt ou atelier où installer la station (alimentation électrique et air disponibles ou installables) ?",ok:"oui",aide:"Il faut un emplacement fixe : la station n'est pas un appareil portable."},
+   {t:"Le site n'a-t-il pas déjà une station de gonflage automatique récente en service ?",ok:"oui",aide:"Une station déjà installée depuis peu ne peut pas être refinancée."}
+  ],
+  d:["Nombre de véhicules légers / utilitaires de la flotte","Nombre de poids lourds ou autocars","Fréquence de passage sur le site (quotidien, hebdomadaire)","Adresse du dépôt et nombre de sites","Qui entretient les pneus aujourd'hui (garage externe, atelier interne)"]},
+ {code:"BAR-TH-171",prov:true,secteur:"Particuliers, maisons et appartements en métropole",
+  intro:"Installation d'une pompe à chaleur air/eau pour le chauffage (et éventuellement l'eau chaude) d'un logement existant, à la place ou en complément du chauffage actuel.",
+  q:[
+   {t:"Le logement a-t-il plus de deux ans ?",ok:"oui",aide:"Les logements neufs ou de moins de deux ans ne sont pas éligibles."},
+   {t:"Le logement est-il en France métropolitaine ?",ok:"oui",aide:"Cette fiche ne s'applique pas aux DOM-TOM."},
+   {t:"Le logement a-t-il un chauffage central à eau : radiateurs à eau ou plancher chauffant reliés à une chaudière ?",ok:"oui",aide:"Une PAC air/eau se branche sur un circuit d'eau. Avec des radiateurs électriques ou un poêle seul, c'est une autre fiche (air/air ou solution différente)."},
+   {t:"Le logement est-il occupé (résidence principale ou secondaire) et non en chantier de construction ?",ok:"oui",aide:"Un logement en construction ou en rénovation lourde non achevée ne compte pas comme existant."},
+   {t:"Y a-t-il un espace extérieur (jardin, cour, terrasse, façade) pour poser l'unité extérieure ?",ok:"oui",aide:"Sans emplacement extérieur, l'installation est impossible."}
+  ],
+  d:["Chauffage actuel : fioul, gaz, charbon, électrique, bois (c'est le point clé de l'offre)","Âge et état de la chaudière actuelle","Surface habitable et nombre de pièces","Propriétaire occupant, bailleur ou locataire","Nombre de personnes au foyer et tranche de revenus (pour l'accompagnement)","Eau chaude : à intégrer ou non"]},
+ {code:"AGRI-EQ-110",prov:true,secteur:"Exploitations agricoles : éleveurs, producteurs de fourrage, séchage de récoltes",
+  intro:"Séchage en grange par insufflation d'air chauffé par capteurs solaires (toiture solaire ou panneaux hybrides). Cible : les exploitations qui sèchent du foin, du fourrage, des céréales ou des plantes.",
+  q:[
+   {t:"Le prospect est-il une exploitation agricole en activité (SIRET agricole, MSA) ?",ok:"oui",aide:"La fiche est réservée au secteur agricole."},
+   {t:"L'exploitation sèche-t-elle ou souhaite-t-elle sécher des produits en grange : foin, fourrage en vrac, céréales, plantes aromatiques, tabac… ?",ok:"oui",aide:"Sans besoin de séchage, l'installation n'a pas d'usage."},
+   {t:"Y a-t-il un bâtiment (grange, hangar) avec une toiture bien exposée (sud, sud-est ou sud-ouest) sur laquelle poser les capteurs ?",ok:"oui",aide:"Le système récupère la chaleur sous la toiture : il faut une toiture exploitable."},
+   {t:"Le séchage n'est-il pas déjà assuré par un séchoir solaire récent ?",ok:"oui",aide:"Une installation solaire déjà en place ne peut pas être refinancée."}
+  ],
+  d:["Produit séché et volume par an (tonnes ou bottes)","Surface de toiture disponible et orientation","Séchoir actuel : ventilation seule, gaz, fioul, électrique","Ventilateur ou cellules de séchage existants","Période de séchage (mois de l'année)"]},
+ {code:"IND-UT-137",prov:false,secteur:"Sites industriels : agroalimentaire, chimie, plasturgie, papeterie, blanchisserie, abattoir…",
+  intro:"Pompe à chaleur qui récupère une chaleur perdue sur le site (groupe froid, compresseur, eaux chaudes, fumées) et la remonte en température pour chauffer un procédé, des locaux ou de l'eau. Réservé à l'industrie.",
+  q:[
+   {t:"Le prospect est-il un site industriel de production (usine, atelier de transformation, blanchisserie industrielle…) ?",ok:"oui",aide:"La fiche est réservée au secteur industriel : pas de tertiaire, pas de résidentiel."},
+   {t:"Le site rejette-t-il une chaleur non utilisée : groupe froid, compresseur d'air, eaux de process chaudes, fumées, condenseurs, tour de refroidissement ?",ok:"oui",aide:"C'est la source de la PAC. Sans chaleur perdue, pas d'opération."},
+   {t:"Cette chaleur est-elle disponible toute l'année ou une grande partie de l'année, avec une source jamais glaciale (tiède, au moins 25 °C) ?",ok:"oui",aide:"Une source trop froide ou très saisonnière ne remplit pas les conditions techniques de la fiche."},
+   {t:"Le site a-t-il un besoin de chaleur sur place : procédé (eau chaude, lavage, séchage), chauffage des locaux ou eau chaude sanitaire ?",ok:"oui",aide:"La chaleur récupérée doit servir sur le même site."},
+   {t:"Ce besoin est-il aujourd'hui couvert par du gaz, du fioul, de la vapeur ou de l'électricité directe ?",ok:"oui",aide:"C'est cette énergie que la PAC vient remplacer."},
+   {t:"Cette chaleur perdue n'a-t-elle jamais fait l'objet d'une récupération déjà subventionnée ?",ok:"oui",aide:"Une source déjà valorisée par une aide n'est plus éligible."},
+   {t:"Le prospect accepte-t-il une étude de dimensionnement avant travaux (visite technique, mesures) ?",ok:"oui",aide:"L'étude préalable est obligatoire pour cette fiche."}
+  ],
+  d:["Activité du site et effectif","Source de chaleur perdue identifiée et température approximative","Besoin de chaleur visé et température nécessaire","Énergie actuelle et facture annuelle approximative","Jours et heures de fonctionnement par an","Puissance du besoin (petit site, moyen site) — la fiche vise les besoins jusqu'à 2 MW"]},
+ {code:"BAR-TH-168",prov:false,secteur:"Particuliers, maisons individuelles en métropole",
+  intro:"Dispositif solaire thermique sur appoint séparé : système solaire combiné (chauffage + eau chaude) ou chauffe-eau solaire, en maison individuelle. C'est la fiche « SSC » de la liste.",
+  q:[
+   {t:"S'agit-il d'une maison individuelle (pas un appartement ni un immeuble collectif) ?",ok:"oui",aide:"La fiche est réservée aux maisons individuelles."},
+   {t:"La maison a-t-elle plus de deux ans et se trouve-t-elle en France métropolitaine ?",ok:"oui",aide:"Existant uniquement, et pas de DOM-TOM (fiche BAR-TH-124 pour l'outre-mer)."},
+   {t:"Y a-t-il une toiture ou un terrain bien exposé (sud, sud-est, sud-ouest), sans ombre importante, pour poser des capteurs ?",ok:"oui",aide:"Compter au moins 2 m² pour l'eau chaude seule et environ 8 m² pour chauffage + eau chaude."},
+   {t:"Le solaire viendra-t-il en complément d'un appoint (chaudière, ballon existant ou neuf) et non en remplacement total ?",ok:"oui",aide:"La fiche finance le dispositif solaire sur appoint séparé : l'appoint reste."},
+   {t:"Si l'objectif est aussi le chauffage : la maison a-t-elle des radiateurs à eau ou un plancher chauffant, et l'appoint n'est-il pas électrique ?",ok:"oui",aide:"Pour l'usage chauffage + eau chaude, il faut un circuit d'eau et un appoint non électrique. Pour l'eau chaude seule, un appoint électrique est accepté."},
+   {t:"Le projet concerne-t-il des capteurs solaires thermiques (eau chaude), et non des panneaux photovoltaïques ou hybrides ?",ok:"oui",aide:"Les panneaux hybrides PV + thermique relèvent de la fiche BAR-TH-162."}
+  ],
+  d:["Usage visé : eau chaude seule ou chauffage + eau chaude","Appoint actuel : gaz, fioul, bois, électrique","Nombre de personnes au foyer","Surface de toiture exploitable et orientation","Émetteurs de chauffage : radiateurs à eau, plancher chauffant, électrique"]},
+ {code:"BAR-EN-101",prov:false,secteur:"Particuliers, maisons et appartements en métropole",
+  intro:"Isolation de combles perdus, de combles aménagés ou de rampants de toiture dans un logement existant.",
+  q:[
+   {t:"Le logement a-t-il plus de deux ans et se trouve-t-il en France métropolitaine ?",ok:"oui",aide:"Existant uniquement (fiche BAR-EN-106 pour l'outre-mer)."},
+   {t:"Les combles ou la toiture sont-ils aujourd'hui non isolés, ou isolés avec un isolant ancien, tassé ou trop mince ?",ok:"oui",aide:"Une isolation récente et conforme ne peut pas être refaite au titre de la fiche."},
+   {t:"Les combles sont-ils accessibles (trappe, escalier) ou la toiture accessible par l'intérieur ou l'extérieur ?",ok:"oui",aide:"Sans accès, une visite technique doit d'abord vérifier la faisabilité."},
+   {t:"Le logement est-il chauffé (pièce habitable sous les combles) ?",ok:"oui",aide:"On isole ce qui sépare un volume chauffé de l'extérieur ; un grenier au-dessus d'un local non chauffé n'apporte rien."}
+  ],
+  d:["Type : combles perdus, combles aménagés, rampants","Surface approximative des combles ou de la toiture (m²)","Isolant actuel : aucun, laine ancienne, épaisseur","Présence de spots, conduit de cheminée, VMC dans les combles","Propriétaire occupant, bailleur, copropriété"]},
+ {code:"BAR-EN-102",prov:false,secteur:"Particuliers, maisons et appartements en métropole",
+  intro:"Isolation des murs donnant sur l'extérieur ou sur un local non chauffé, par l'intérieur ou par l'extérieur, dans un logement existant.",
+  q:[
+   {t:"Le logement a-t-il plus de deux ans et se trouve-t-il en France métropolitaine ?",ok:"oui",aide:"Existant uniquement (fiche BAR-EN-107 pour l'outre-mer)."},
+   {t:"Les murs concernés donnent-ils sur l'extérieur ou sur un local non chauffé (garage, cellier, cage d'escalier) ?",ok:"oui",aide:"Un mur entre deux pièces chauffées n'est pas éligible."},
+   {t:"Ces murs sont-ils aujourd'hui non isolés ou isolés avec un doublage ancien et mince ?",ok:"oui",aide:"Une isolation récente et conforme ne peut pas être refaite."},
+   {t:"En maison individuelle, ou avec l'accord de la copropriété si l'isolation se fait par l'extérieur ?",ok:"oui",aide:"En copropriété, une isolation par l'extérieur touche les parties communes : accord de l'assemblée nécessaire."}
+  ],
+  d:["Surface de murs à isoler (m²) ou nombre de façades","Par l'intérieur ou par l'extérieur (façade à rénover ?)","Matériau des murs : parpaing, brique, pierre, bois","Chauffage actuel et ressenti (murs froids, humidité)","Propriétaire occupant, bailleur, copropriété"]},
+ {code:"BAR-EN-103",prov:false,secteur:"Particuliers, maisons et appartements en métropole",
+  intro:"Isolation d'un plancher bas situé au-dessus d'un sous-sol, d'un vide sanitaire, d'une cave ou d'un garage non chauffé, dans un logement existant.",
+  q:[
+   {t:"Le logement a-t-il plus de deux ans et se trouve-t-il en France métropolitaine ?",ok:"oui",aide:"Existant uniquement."},
+   {t:"Y a-t-il sous le logement un espace non chauffé : cave, vide sanitaire, garage, sous-sol, passage ouvert ?",ok:"oui",aide:"Un plancher posé directement sur la terre (terre-plein) n'est pas concerné par cette fiche."},
+   {t:"Cet espace est-il accessible pour isoler le plafond par en dessous (hauteur suffisante pour passer, environ 60 cm minimum en vide sanitaire) ?",ok:"oui",aide:"Sans accès par dessous, la pose est impossible ; une visite technique tranche."},
+   {t:"Le plancher est-il aujourd'hui non isolé ?",ok:"oui",aide:"Un plancher déjà isolé récemment ne peut pas être refait."}
+  ],
+  d:["Surface du plancher à isoler (m²)","Nature du local en dessous : cave, vide sanitaire, garage, sous-sol","Hauteur disponible sous le plancher","Humidité ou infiltrations dans le local","Propriétaire occupant, bailleur, copropriété"]}
+];
+const ELIG_MAP=Object.fromEntries(ELIG.map(e=>[e.code,e]));
+const eligQuestions=e=>[...ELIG_COMMUN,...e.q];
+const eligSecteur=e=>{const s=e.code.slice(0,3);return s==='BAR'?'Résidentiel':s==='BAT'?'Tertiaire':s==='IND'?'Industrie':s==='AGR'?'Agriculture':s==='TRA'?'Transport':s==='RES'?'Réseaux et éclairage':'';};
+
+function vInfoCee(){
+  const grp=[['Résidentiel','BAR'],['Industrie','IND'],['Agriculture','AGR'],['Transport','TRA'],['Réseaux et éclairage','RES']];
+  return `<div class="page"><h1>Information CEE</h1>
+  <p>Les questions à poser au téléphone pour savoir, en deux minutes, si un prospect peut prétendre à une fiche. Aucun montant, aucun calcul : seulement ce qui rend éligible, ou non. Touchez une fiche, cochez les réponses, le verdict s'affiche et peut être collé dans la note d'appel.</p>
+  <div class="xs mut" style="margin-bottom:6px">Les fiches marquées « provisoire » seront recalées sur les fiches officielles dès réception.</div>
+  ${grp.map(([lbl,pre])=>{const L=ELIG.filter(e=>e.code.startsWith(pre));return L.length?`<h2>${lbl}</h2><div class="egrid">${L.map(e=>`<button class="ecard" data-elig="${e.code}"><div class="ecode">${e.code}${e.prov?'<span class="tag a" style="margin-left:8px;font-size:10.5px">provisoire</span>':''}</div><div class="etit">${esc(ficheTitre(e.code))}</div><div class="xs mut" style="margin-top:6px">${esc(e.secteur)}</div><div class="xs" style="margin-top:8px;color:var(--bleu);font-weight:600">${eligQuestions(e).length} questions ›</div></button>`).join('')}</div>`:'';}).join('')}
+  <h2>Rappel pour toutes les fiches</h2>
+  <ul><li>Rien de signé, rien de commencé : c'est la question numéro un.</li><li>L'interlocuteur doit pouvoir décider ou obtenir l'accord du propriétaire.</li><li>Le verdict de la checklist est une pré-qualification : la visite technique confirme.</li></ul></div>`;
+}
+
+/* checklist interactive : overlay au-dessus de la fiche client */
+let eligEtat={};
+function openElig(code,ficheId){
+  const e=ELIG_MAP[code];if(!e)return;
+  const Q=eligQuestions(e);
+  const st=eligEtat[code+':'+(ficheId||'')]||(eligEtat[code+':'+(ficheId||'')]={r:{},d:{}});
+  let c=document.getElementById('elig');if(!c){c=document.createElement('div');c.id='elig';document.body.appendChild(c);}
+  const f=ficheId?fiches.find(x=>x.id===ficheId):null;
+  c.innerHTML=`<div class="ovl eovl" id="eovl"><div class="pane" onclick="event.stopPropagation()">
+    <header><div style="flex:1;min-width:0"><div class="chips" style="margin-bottom:6px"><span class="tag b">${e.code}</span><span class="tag">${eligSecteur(e)}</span>${e.prov?'<span class="tag a">provisoire</span>':''}</div><h2>${esc(ficheTitre(e.code))}</h2>${f?`<div class="sm mut" style="margin-top:4px">Pour ${esc(nomClient(f))}</div>`:''}</div><button class="btn g sm" id="ecx">Fermer</button></header>
+    <p class="sm" style="color:var(--encre-2)">${esc(e.intro)}</p>
+    <div id="everdict" class="everdict"></div>
+    <section class="sec"><div class="sech"><h3>Questions d'éligibilité</h3><span class="xs mut">réponse attendue : <b>oui</b></span></div>
+      ${Q.map((q,i)=>`<div class="eq" data-i="${i}"><div class="eqt">${i+1}. ${esc(q.t)}</div><div class="chips" style="margin-top:6px"><span class="chip ${st.r[i]==='oui'?'on':''}" data-rep="oui">Oui</span><span class="chip ${st.r[i]==='non'?'on':''}" data-rep="non">Non</span><span class="chip ${st.r[i]==='?'?'on':''}" data-rep="?">Ne sait pas</span></div><div class="xs mut eqa" style="margin-top:5px">${esc(q.aide)}</div></div>`).join('')}
+    </section>
+    <section class="sec"><div class="sech"><h3>À noter pendant l'appel</h3></div>
+      ${e.d.map((d,i)=>`<div class="ed"><label class="f">${esc(d)}</label><input type="text" data-d="${i}" value="${esc(st.d[i]||'')}" placeholder="…"></div>`).join('')}
+    </section>
+    <div class="actions"><button class="btn" id="ecopy">${f?'Copier dans la note d\'appel':'Copier le résumé'}</button><button class="btn g" id="ereset">Effacer</button><button class="btn g" id="ecx2" style="margin-left:auto">Fermer</button></div>
+  </div></div>`;
+  const verdict=()=>{
+    const bl=Q.map((q,i)=>st.r[i]);
+    const ko=Q.filter((q,i)=>st.r[i]&&st.r[i]!=='?'&&st.r[i]!==q.ok);
+    const manq=Q.filter((q,i)=>!st.r[i]||st.r[i]==='?').length;
+    const v=document.getElementById('everdict');
+    let cls,txt,sub;
+    if(ko.length){cls='r';txt='Non éligible en l\'état';sub='Point bloquant : '+ko.map(q=>q.t.replace(/\s*\?$/,'')).slice(0,2).join(' · ');}
+    else if(manq){cls='a';txt='Qualification en cours';sub=manq+' question'+(manq>1?'s':'')+' sans réponse';}
+    else{cls='v';txt='Éligible sur le papier';sub='À confirmer par la visite technique';}
+    v.className='everdict '+cls;v.innerHTML=`<b>${txt}</b><span>${sub}</span>`;
+    return {cls,txt,ko,manq};
+  };
+  const resume=()=>{
+    const r=verdict();
+    const oui=Q.filter((q,i)=>st.r[i]===q.ok).length;
+    const notes=e.d.map((d,i)=>st.d[i]?d.replace(/\s*\(.*\)/,'')+' : '+st.d[i]:'').filter(Boolean);
+    return `Éligibilité ${e.code} — ${r.txt} (${oui}/${Q.length} ok${r.manq?', '+r.manq+' sans réponse':''})`+(r.ko.length?'. Bloquant : '+r.ko.map(q=>q.t.replace(/\s*\?$/,'')).join(' ; '):'')+(notes.length?'. '+notes.join(' · '):'');
+  };
+  c.querySelectorAll('.eq').forEach(el=>el.querySelectorAll('[data-rep]').forEach(ch=>ch.onclick=()=>{const i=+el.dataset.i;st.r[i]=st.r[i]===ch.dataset.rep?undefined:ch.dataset.rep;el.querySelectorAll('[data-rep]').forEach(x=>x.classList.toggle('on',x.dataset.rep===st.r[i]));el.classList.toggle('ko',!!st.r[i]&&st.r[i]!=='?'&&st.r[i]!==Q[i].ok);el.classList.toggle('ok',st.r[i]===Q[i].ok);verdict();}));
+  c.querySelectorAll('.eq').forEach(el=>{const i=+el.dataset.i;el.classList.toggle('ko',!!st.r[i]&&st.r[i]!=='?'&&st.r[i]!==Q[i].ok);el.classList.toggle('ok',st.r[i]===Q[i].ok);});
+  c.querySelectorAll('[data-d]').forEach(inp=>inp.oninput=()=>{st.d[+inp.dataset.d]=inp.value;});
+  document.getElementById('eovl').onclick=closeElig;
+  document.getElementById('ecx').onclick=closeElig;document.getElementById('ecx2').onclick=closeElig;
+  document.getElementById('ereset').onclick=()=>{eligEtat[code+':'+(ficheId||'')]=null;openElig(code,ficheId);};
+  document.getElementById('ecopy').onclick=async()=>{
+    const txt=resume();
+    const dn=document.getElementById('dn'),dfv=document.getElementById('dfv');
+    if(f&&dn){dn.value=(dn.value?dn.value.trim()+'\n':'')+txt;if(dfv&&!dfv.value)dfv.value=e.code;closeElig();toast('Résumé ajouté à la note d\'appel');return;}
+    try{await navigator.clipboard.writeText(txt);toast('Résumé copié');}catch(err){prompt('Résumé à copier :',txt);}
+  };
+  verdict();
+}
+function closeElig(){const c=document.getElementById('elig');if(!c)return;const o=c.querySelector('.ovl');if(!o||o.classList.contains('closing'))return;o.classList.add('closing');setTimeout(()=>{if(c.querySelector('.ovl')===o)c.innerHTML='';},210);}
+
 /* ---------- pages ---------- */
 function vApropos(){return `<div class="page"><h1>FranceBase</h1>
   <p>La base de données des leads France métropolitaine, consolidée à partir de six fichiers d'origine et dédoublonnée par numéro de téléphone.</p>
@@ -1704,6 +1971,7 @@ function vApropos(){return `<div class="page"><h1>FranceBase</h1>
   <p>FranceBase est indépendante de DomBase : données, comptes et sauvegardes sont distincts, rien n'est mélangé.</p></div>`;}
 function vAide(){return `<div class="page"><h1>Guide</h1><p><button class="btn" id="bTour">Lancer la visite guidée</button> <span class="sm mut">six étapes, sur les vraies pages</span></p>
   <h2>Le serveur d'équipe</h2><p>Tous les postes travaillent sur la même base. Un appel noté par Samuel apparaît chez Eythan en moins d'une minute, et inversement : rien à envoyer, rien à importer. Le point « ● équipe » en haut à droite confirme la connexion ; s'il passe au rouge, le poste continue de fonctionner seul et se resynchronise dès le retour du réseau.</p>
+<h2>Information CEE</h2><p>Menu → Information CEE : pour chaque fiche à travailler, les questions qui rendent un prospect éligible ou non, sans montant ni calcul. Cochez les réponses pendant l'appel, le verdict s'affiche (éligible sur le papier, qualification en cours, non éligible) et se colle dans la note d'appel. Le même questionnaire s'ouvre depuis une fiche client, sous « Fiche CEE proposée ».</p>
 <h2>Les numéros masqués</h2><p>Dans la liste et sur la fiche, les deux derniers chiffres sont cachés. Un clic sur « Afficher le numéro » le révèle et enregistre qui l'a demandé, et quand. C'est ce qui distingue une fiche réellement travaillée d'une fiche simplement ouverte : le tableau de bord compte ces révélations par utilisateur.</p>
 <h2>0. Travailler à plusieurs</h2><p>Comptes : FB-100 (Eythan, administrateur), FB-101 (Samuel, administrateur), FB-102 à FB-105 (télépros), mot de passe 2026. Chaque poste garde ses données dans son navigateur. Pour remonter le travail d'un télépro : il ouvre le menu → « Envoyer mon activité » (un petit fichier), l'administrateur ouvre le menu → « Importer l'activité d'un collègue ». Les appels, statuts, rappels et enrichissements sont fusionnés sans doublon, et le tableau « Activité par utilisateur » se met à jour. Une solution avec serveur partagé supprimerait cette étape.</p><h2>1. Enrichir</h2><p>À faire depuis l'adresse internet de FranceBase, dans Safari ou Chrome. Les leads résidentiels sont exclus d'office ; l'enrichissement ne concerne que les fiches d'entreprises ajoutées à la base. Onglet Enrichissement, bouton Lancer. La plateforme interroge le registre national entreprise par entreprise et enregistre chaque résultat directement dans la base : les secteurs apparaissent aussitôt dans Base clients. Vous pouvez changer d'onglet, le traitement continue (une barre en haut l'indique), et vous pouvez l'arrêter et le reprendre à tout moment. L'export Excel n'est qu'une sauvegarde : rien à réimporter.</p>
   <h2>2. Arbitrer</h2><p>Quand plusieurs entreprises portent le même nom dans le département, elles vous sont proposées côte à côte avec leur adresse et leur activité. Un clic tranche.</p>
@@ -1713,13 +1981,14 @@ function vAide(){return `<div class="page"><h1>Guide</h1><p><button class="btn" 
 
 /* ---------- menu ---------- */
 function openDrawer(){
-  const P=[['tableau','Tableau de bord'],['base','Base clients'],['enrich','Enrichissement'],null,['apropos','À propos'],['aide','Guide']];
+  const P=[['tableau','Tableau de bord'],['base','Base clients'],['enrich','Enrichissement'],['infocee','Information CEE'],null,['apropos','À propos'],['aide','Guide']];
   const d=document.getElementById('drawer');
   d.innerHTML=`<div class="dovl" id="dovl"><div class="dpane" onclick="event.stopPropagation()">
     <div style="display:flex;align-items:center;gap:10px"><img src="${LOGO_SMALL}" alt="" style="width:34px;height:34px;border-radius:9px"><div class="logo" style="font-size:19px">France<span style="color:var(--bleu-clair)">Base</span></div></div>
     <div class="sm mut" style="margin:4px 0 20px">Base de données France métropolitaine</div>
     ${P.map(p=>p?`<button class="dlink ${view===p[0]?'on':''}" data-go="${p[0]}">${p[1]}</button>`:'<div class="dsep"></div>').join('')}
     <button class="dlink" id="dtour">Prise en main (visite guidée)</button>
+    <button class="btn sm" id="bdemo" style="margin:6px 0 12px;width:100%">▶ Voir la démo animée</button>
     <div class="dfoot">Connecté : <b>${esc(user.nom)}</b> <span class="xs">(${user.role==='admin'?'administrateur':'télépro'})</span><br>${fiches.length} fiches · ${fiches.filter(f=>f.naf).length} enrichies<br><div class="chips" style="margin-top:8px"><button class="btn g sm" id="bact">Envoyer mon activité</button>${user.role==='admin'?'<button class="btn g sm" id="bactimp">Importer l\'activité d\'un collègue</button><input type="file" id="factimp" accept=".json" style="display:none">':''}</div><button class="btn g sm" id="bserv" style="margin-top:8px">${Serveur.actif()?'Serveur d\'équipe : connecté':'Connecter le serveur d\'équipe'}</button> <button class="btn g sm" id="bresync" style="margin-top:8px">Recharger la base</button><div class="xs mut" style="margin-top:4px">Base de référence : ${DATA.length} fiches. Vos appels, statuts, rappels, enrichissements et fiches saisies à la main sont conservés.</div><br><i style="color:var(--bleu)">Pense bien, tout ira bien.</i></div>
   </div></div>`;
   document.getElementById('dovl').onclick=closeDrawer;
@@ -1727,6 +1996,7 @@ function openDrawer(){
   const ba=document.getElementById('bact');if(ba)ba.onclick=()=>{exporterActivite();};
   const dt=document.getElementById('dtour');if(dt)dt.onclick=()=>{closeDrawer();setTimeout(startTour,260);};
   const bi=document.getElementById('bactimp');if(bi){const fi=document.getElementById('factimp');bi.onclick=()=>fi.click();fi.onchange=async()=>{if(fi.files[0]){closeDrawer();await importerActivite(fi.files[0]);}};}
+  const bd=document.getElementById('bdemo');if(bd)bd.onclick=()=>{closeDrawer();setTimeout(()=>Demo.start(),250);};
   const bsv=document.getElementById('bserv');if(bsv)bsv.onclick=()=>{closeDrawer();formServeur();};
   const br=document.getElementById('bresync');if(br)br.onclick=async()=>{await save();location.reload();};
 }
@@ -1741,6 +2011,7 @@ function repondre(txt){
   const ns=sing(n);
   const lig=f=>({id:f.id,label:nomClient(f),sub:[f.territoire,f.secteur,f.type_lead].filter(Boolean).join(' · ')});
   const secteurs=[...new Set(fiches.map(f=>f.secteur).filter(Boolean))];
+  if(/eligib|question|information cee|qualifier un prospect/.test(n)){return{t:'Les questions d\'éligibilité par fiche sont dans le menu → Information CEE, et dans chaque fiche client sous « Fiche CEE proposée ».',items:[]};}
   if(/effectif|salari|employ/.test(n)){const l=fiches.filter(f=>f.effectif&&(/^\d+$/.test(f.effectif)?+f.effectif>=10:!/0 à 9/.test(f.effectif)));return{t:`${l.length} entreprises de 10 salariés ou plus.`,items:l.slice(0,40).map(f=>({id:f.id,label:nomClient(f),sub:[f.territoire,f.secteur,f.effectif].filter(Boolean).join(' · ')}))};}
   if(/rappel|a appeler|appels/.test(n)){const l=fiches.filter(f=>f.rappel&&f.rappel<=AUJ()&&f.statut!=='Ne pas recontacter');return{t:`${l.length} appel${l.length>1?'s':''} à passer aujourd'hui ou en retard.`,items:l.slice(0,40).map(lig)};}
   if(/\bdom\b|outre.?mer|dom.?tom/.test(n)){const l=fiches.filter(f=>f.zone==='DOM-TOM');return{t:`${l.length} prospects en DOM-TOM (${[...new Set(l.map(f=>f.territoire))].join(', ')}).`,items:l.slice(0,40).map(lig)};}
@@ -1790,12 +2061,13 @@ function drawChat(){
    `<div class="amsg a">${esc(m.t)}${m.items&&m.items.length?`<div class="ares">${m.items.slice(0,8).map(i=>`<div class="ait" data-open="${i.id}"><b>${esc(i.label)}</b><span>${esc(i.sub)}</span></div>`).join('')}${m.items.length>8?`<div class="xs mut" style="padding:4px 2px">+ ${m.items.length-8} autres</div>`:''}</div>`:''}</div>`).join('')
    :`<div class="avide">Posez une question sur la base.<br><span class="xs">« fioul », « Île-de-France », « DOM-TOM », « NRP », un nom, un département</span><br><br><i class="xs" style="color:var(--bleu)">Pense bien, tout ira bien.</i></div>`;
   b.scrollTop=b.scrollHeight;
-  b.querySelectorAll('[data-open]').forEach(e=>e.onclick=()=>{closeAssist();setTimeout(()=>detail(e.dataset.open),200);});
+  b.querySelectorAll('[data-open]').forEach(e=>e.onclick=()=>{closeAssist();closeElig();setTimeout(()=>detail(e.dataset.open),200);});
 }
 function closeAssist(){const d=document.getElementById('assist'),o=d.querySelector('.aovl');if(!o)return;o.classList.add('closing');setTimeout(()=>d.innerHTML='',200);}
 
 /* ---------- événements ---------- */
-function bind(){
+let _qTimer=null;
+function bind(partiel){
   const on=(i,ev,fn)=>{const e=document.getElementById(i);if(e)e.addEventListener(ev,fn);};
   document.querySelectorAll('[data-open]').forEach(e=>e.onclick=ev=>{if(ev.target.closest('.ck'))return;detail(e.dataset.open);});
   document.querySelectorAll('[data-go]').forEach(e=>e.onclick=()=>{view=e.dataset.go;render();});
@@ -1804,7 +2076,7 @@ function bind(){
     if(k==='sect')fSect=v;else if(k==='zone')fZone=v;else if(k==='terr'){fTerr=v;fZone=['Guadeloupe','Martinique','Guyane','La Réunion','Mayotte','Outre-mer'].includes(v)?'DOM-TOM':'Métropole';}else if(k==='stat')fStat=v;else if(k==='src')fSrc=v;else if(k==='enr')fEnr=v;else if(k==='fiche')fFiche=v;else if(k==='type')fType=v;else if(k==='visee')fVisee=v;else if(k==='chauf')fChauf=v;else if(k==='ann')fAnn=v;else if(k==='rappel')fEnr='rappel';
     pageN=60;view='base';render();});
   document.querySelectorAll('[data-sort]').forEach(t=>t.onclick=()=>{if(sortKey===t.dataset.sort)sortDir=-sortDir;else{sortKey=t.dataset.sort;sortDir=1;}render();});
-  on('q','input',e=>{q=e.target.value;pageN=60;const p=e.target.selectionStart;render();const n=document.getElementById('q');if(n){n.focus();n.setSelectionRange(p,p);}});
+  if(!partiel){on('q','input',e=>{q=e.target.value;pageN=60;clearTimeout(_qTimer);_qTimer=setTimeout(renderListe,120);});}
   on('fs','change',e=>{fSect=e.target.value;pageN=60;render();});
   on('ft','change',e=>{fTerr=e.target.value;pageN=60;render();});
   on('fz','change',e=>{fZone=e.target.value;pageN=60;render();});
@@ -1814,7 +2086,7 @@ function bind(){
   document.querySelectorAll('[data-rm]').forEach(e=>e.onclick=()=>{const k=e.dataset.rm;({q:()=>q='',sect:()=>fSect='',terr:()=>fTerr='',fiche:()=>fFiche='',type:()=>fType='',stat:()=>fStat='',src:()=>fSrc='',enr:()=>fEnr='',visee:()=>fVisee='',chauf:()=>fChauf='',ann:()=>fAnn='',zone:()=>fZone='Métropole'})[k]();pageN=60;render();});
   on('fexp','click',()=>exportXLSX(filtrer(),'francebase-export.xlsx'));
   on('fimp','click',showImport);
-  on('bmore','click',()=>{pageN+=60;render();});
+  on('bmore','click',()=>{pageN+=60;renderListe();});
   on('terrMore','click',()=>{const e=document.getElementById('terrExtra');e.style.display=e.style.display==='none'?'':'none';});
   on('ckAll','click',e=>{const l=filtrer().slice(0,pageN);if(e.target.checked)l.forEach(f=>sel.add(f.id));else l.forEach(f=>sel.delete(f.id));render();});
   document.querySelectorAll('[data-ck]').forEach(c=>c.onclick=e=>{e.stopPropagation();if(c.checked)sel.add(c.dataset.ck);else sel.delete(c.dataset.ck);render();});
@@ -1823,6 +2095,7 @@ function bind(){
   on('bulk','change',async e=>{const s=e.target.value;if(!s)return;fiches.forEach(f=>{if(sel.has(f.id))f.statut=s;});await save();toast(sel.size+' fiches → '+s);sel.clear();render();});
   on('bgo','click',lancerEnrich);
   on('bTour','click',startTour);
+  document.querySelectorAll('[data-elig]').forEach(b=>b.onclick=()=>openElig(b.dataset.elig));
   on('bdedup','click',async()=>{const avant=fiches.length;const n=dedoublonner();await save();render();toast(n?n+' doublons fusionnés · '+avant+' → '+fiches.length+' fiches':'Aucun doublon : '+fiches.length+' fiches uniques');});
   on('bRetry','click',async()=>{fiches.forEach(f=>{if(f.enrich_etat==='introuvable')f.enrich_etat='';});await save();render();});
   on('rgo','click',rechercheLibre);on('rq','keydown',e=>{if(e.key==='Enter')rechercheLibre();});
@@ -1839,19 +2112,23 @@ function bind(){
 }
 /* ---------- visite guidée ---------- */
 const KT='francebase:tour';
+async function tourMasque(){try{if(localStorage.getItem(KT))return true;}catch(e){}try{return !!(await Store.get(KT));}catch(e){return false;}}
+async function masquerTour(on){try{if(on)localStorage.setItem(KT,'1');else localStorage.removeItem(KT);}catch(e){}try{if(on)await Store.set(KT,1);else await Store.del(KT);}catch(e){}}
+async function tourAuto(anim){if(user&&user.role==='demo')return;if(await tourMasque())return;setTimeout(startTour,anim?900:500);}
 const TOUR=[
  {v:'tableau',t:'Le tableau de bord',p:'Chaque tuile est un raccourci : touchez « Appels à passer », une région, DOM-TOM ou un mode de chauffage et la base s\'ouvre déjà filtrée. Les chiffres se mettent à jour à chaque appel enregistré.',sel:'.tiles'},
  {v:'base',t:'La base clients',p:'Recherche par nom, téléphone, e-mail, ville, code postal ou annotation. Les filtres se combinent : Territoire (Métropole par défaut, DOM-TOM), Région, Suivi, Source… Retirez-les un par un dans la ligne « Actifs ». « Exporter » sort la liste affichée en Excel.',sel:'#view .card'},
  {v:'base',open:'fiche',t:'Requalifier un lead',p:'Touchez une ligne : la fiche s\'ouvre. Dans « Suivi commercial », choisissez le résultat de l\'appel, la fiche CEE proposée, un prochain appel, une note, puis « Enregistrer l\'appel ». Plus haut, « Lead d\'origine » montre tout ce que contenait le fichier.',sel:'#dst'},
  {v:'base',open:'nouveau',t:'Créer un client',p:'Bouton « Nouveau client » : prénom, nom, téléphone, e-mail, adresse, mode de chauffage. C\'est tout pour un particulier. Si c\'est une entreprise, dépliez « Entreprise (facultatif) » en bas : le SIRET remplit tout seul la société, l\'adresse, le code NAF et le secteur.',sel:'#n_prenom'},
  {v:'tableau',open:'menu',t:'Envoyer son travail à l\'administrateur',p:'Chaque télépro travaille dans son navigateur. Menu → « Envoyer mon activité » crée un petit fichier avec ses appels, statuts et rappels. L\'administrateur l\'importe avec « Importer l\'activité d\'un collègue » : tout se fusionne sans doublon et le tableau « Activité par utilisateur » se met à jour.',sel:'#bact'},
+ {v:'infocee',t:'Information CEE',p:'Les questions à poser pour savoir si un prospect est éligible à une fiche : rien de chiffré, seulement ce qui qualifie ou disqualifie. Touchez une fiche, cochez les réponses, le verdict s\'affiche et se colle dans la note d\'appel. Le même bouton existe dans chaque fiche client, sous « Fiche CEE proposée ».',sel:'.egrid'},
  {v:'tableau',open:'assist',t:'Le robot de recherche',p:'Le bouton rond en bas à droite répond à vos questions et ouvre les fiches trouvées : « fioul », « Île-de-France », « département 59 », « DOM-TOM », « NRP », « appels à passer », un nom… Essayez « bilan » pour l\'état de la base.',sel:'.apane'}
 ];
 let tourI=-1;
 function tourClean(){document.querySelectorAll('.tour-hi').forEach(e=>e.classList.remove('tour-hi'));const t=document.getElementById('tour');if(t)t.remove();}
 const pause=ms=>new Promise(r=>setTimeout(r,ms));
 async function tourStep(i){
-  tourClean();closeModal();closeDrawer();closeAssist();
+  tourClean();closeModal();closeDrawer();closeAssist();closeElig();
   if(i<0||i>=TOUR.length){tourI=-1;if(i>=TOUR.length){view='tableau';render();toast('Bonne prospection. Pense bien, tout ira bien.');}return;}
   tourI=i;const s=TOUR[i];
   if(view!==s.v){view=s.v;render();}
@@ -1866,14 +2143,125 @@ async function tourStep(i){
   if(el&&s.sel==='#n_prenom')el=el.closest('.cols')||el;
   if(el){el.classList.add('tour-hi');try{el.scrollIntoView({block:'center',behavior:'smooth'});}catch(e){}}
   const d=document.createElement('div');d.className='tour';d.id='tour';
-  d.innerHTML=`<div class="tstep">Étape ${i+1} sur ${TOUR.length}</div><h3>${s.t}</h3><p>${s.p}</p><div class="tbtns">${i>0?'<button class="btn g sm" id="tprev">Précédent</button>':''}<button class="btn sm" id="tnext">${i===TOUR.length-1?'Terminer':'Suivant'}</button><button class="btn g sm" id="tquit" style="margin-left:auto">Quitter</button></div><div style="margin-top:10px;text-align:right"><span id="tnever" class="xs" style="color:var(--encre-3);cursor:pointer;text-decoration:underline">Ne plus jamais afficher cette prise en main</span></div>`;
+  d.innerHTML=`<div class="tstep">Étape ${i+1} sur ${TOUR.length}</div><h3>${s.t}</h3><p>${s.p}</p><div class="tbtns">${i>0?'<button class="btn g sm" id="tprev">Précédent</button>':''}<button class="btn sm" id="tnext">${i===TOUR.length-1?'Terminer':'Suivant'}</button><button class="btn g sm" id="tquit" style="margin-left:auto">Quitter</button></div><label class="tnever"><input type="checkbox" id="tnever"> Ne plus jamais afficher cette prise en main</label>`;
   document.body.appendChild(d);
   document.getElementById('tnext').onclick=()=>tourStep(i+1);
   const p=document.getElementById('tprev');if(p)p.onclick=()=>tourStep(i-1);
   document.getElementById('tquit').onclick=()=>tourStep(-1);
-  document.getElementById('tnever').onclick=()=>{try{localStorage.setItem(KT,'1');}catch(e){}tourStep(-1);toast('La prise en main ne s\'affichera plus. Menu → Prise en main pour la revoir.');};
+  document.getElementById('tnever').onchange=async ev=>{if(!ev.target.checked)return;await masquerTour(true);tourStep(-1);toast('C\'est noté : la prise en main ne s\'affichera plus. Menu → Prise en main pour la revoir.');};
 }
-function startTour(){tourStep(0);}
+
+/* ---------- mode démo : visite animée de toutes les fonctionnalités ---------- */
+const Demo=(()=>{
+  let actif=false, i=-1, timer=null, pause=false, tok=0, reste=0, debut=0, dur=0;
+  const SCENES=[
+    {v:'tableau',sel:'.top',t:'Bienvenue sur FranceBase',p:'Votre base de prospects, pensée pour les télépros : tout se fait en quelques touches, et chaque geste compte pour l\'équipe.',d:5200,pt:'#hlogotxt'},
+    {v:'tableau',sel:'#view .tiles',t:'La base en un coup d\'œil',p:'Combien de fiches, combien de téléphones, combien d\'e-mails. Chaque tuile est un raccourci : elle ouvre la base déjà filtrée.',d:5600,pt:'#view .tiles .tile:nth-child(1)'},
+    {v:'tableau',sel:'.cad',t:'La cadence de la semaine',p:'Les appels du jour en bleu, les numéros affichés en gris, les RDV pris sous chaque jour. On voit tout de suite si l\'équipe tourne.',d:6000,pt:'.cadj.auj'},
+    {v:'tableau',sel:'[data-f="rappel"]',t:'Les appels à passer',p:'Les rappels du jour et ceux en retard, avec le numéro cliquable. C\'est par là qu\'un télépro commence sa journée.',d:5200,pt:'[data-f="rappel"]',clic:true},
+    {v:'tableau',sel:'table.mini, [data-f="stat"]',t:'Qui a travaillé, sur quoi',p:'Par utilisateur : appels du jour, sur 7 jours, numéros affichés, RDV, signés, NRP, refus, dernière activité. Partagé entre tous les postes grâce au serveur d\'équipe.',d:6800,pt:'table.mini tbody tr:first-child, [data-f="stat"]'},
+    {v:'base',sel:'#view .card',t:'La base clients',p:'Recherche instantanée sur 20 000 fiches : nom, téléphone, ville, code postal, annotation. Les filtres se combinent et se retirent un par un.',d:5200,pt:'#q'},
+    {v:'base',type:{sel:'#q',txt:'fioul'},sel:'#bliste',t:'On tape, ça filtre',p:'Le résultat se met à jour pendant la frappe. Ici, tous les prospects au fioul — de bons candidats pour une pompe à chaleur.',d:5400,pt:'#bliste tbody tr:first-child, #bliste .mc'},
+    {v:'base',clear:true,sel:'#bchips',t:'Les filtres actifs',p:'Chaque filtre posé apparaît ici en chip. On en retire un sans toucher aux autres, ou « Tout effacer » pour repartir de zéro.',d:4800,pt:'#bchips .chip'},
+    {v:'base',open:'fiche',sel:'.hero',t:'La fiche client',p:'Statut, secteur, territoire, et le numéro masqué : les deux derniers chiffres n\'apparaissent qu\'au clic sur « Afficher le numéro ». C\'est la trace d\'un vrai appel engagé.',d:6400,pt:'#dvoir'},
+    {v:'base',open:'fiche',sel:'#dst',t:'Le suivi commercial',p:'Résultat de l\'appel, fiche CEE proposée, prochain rappel en un clic (demain, dans 3 jours, la semaine prochaine), une note. « Valider l\'appel » envoie tout dans l\'historique et planifie le rappel.',d:7200,pt:'[data-rap="3"]',clic:true},
+    {v:'base',open:'nouveau',sel:'.pane',t:'Créer un client',p:'Un prospect qui n\'est pas encore dans la base : prénom, nom, téléphone, adresse, chauffage. Le doublon est vérifié avant l\'enregistrement.',d:5200,pt:'#n_prenom'},
+    {v:'tableau',open:'assist',type:{sel:'#aq',txt:'appels à passer',go:true},sel:'.apane',t:'Le robot de recherche',p:'Posez la question en français : « fioul », « département 59 », « NRP », un nom… Il répond et ouvre les fiches trouvées.',d:6400,pt:'#abody'},
+    {v:'infocee',sel:'.egrid',t:'Information CEE',p:'Les questions d\'éligibilité de chaque fiche à travailler, sans aucun chiffre. Le télépro coche les réponses pendant l\'appel, le verdict tombe, et se colle dans la note.',d:6200,pt:'.ecard'},
+    {v:'tableau',open:'menu',sel:'.dpane',t:'Le serveur d\'équipe',p:'Tous les postes partagent la même base en temps réel. Le point vert « équipe » en haut confirme la connexion. Le guide et les accès sont ici aussi.',d:5600,pt:'#bserv'},
+    {v:'tableau',sel:'.top',t:'C\'est tout, et c\'est déjà beaucoup',p:'Pense bien, tout ira bien.',d:4200,pt:'#hlogotxt',fin:true},
+  ];
+  const $=s=>document.querySelector(s);
+  const dodo=ms=>new Promise(r=>setTimeout(r,ms));
+  function ui(){
+    if($('#demoui'))return;
+    const d=document.createElement('div');d.id='demoui';
+    d.innerHTML=`<div id="dspot"></div><div id="dcur"><svg viewBox="0 0 24 24" width="30" height="30"><path d="M5 3l14 8-6 1.5L16 20l-3 1-3-7.5L5 17z" fill="#fff" stroke="#0D1B33" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
+    <div id="dcard"><div class="dtop"><span id="dnum"></span><span class="dlbl">Démo</span></div><h3 id="dt"></h3><p id="dp"></p>
+      <div class="dprog"><i id="dbar"></i></div>
+      <div class="dbtns"><button class="btn g sm" id="dprev">‹</button><button class="btn sm" id="dpause">Pause</button><button class="btn g sm" id="dnext">Suivant ›</button><button class="btn g sm" id="dquit" style="margin-left:auto">Quitter</button></div><label class="tnever" style="margin-top:8px"><input type="checkbox" id="dnever"> Ne plus jamais afficher la prise en main au démarrage</label></div>`;
+    document.body.appendChild(d);
+    $('#dprev').onclick=()=>aller(i-1);$('#dnext').onclick=()=>aller(i+1);$('#dquit').onclick=stop;
+    tourMasque().then(m=>{const c=$('#dnever');if(c)c.checked=m;});$('#dnever').onchange=async ev=>{await masquerTour(ev.target.checked);toast(ev.target.checked?'C\'est noté : la prise en main ne s\'affichera plus au démarrage.':'La prise en main s\'affichera de nouveau au démarrage.');};
+    $('#dpause').onclick=()=>{pause=!pause;$('#dpause').textContent=pause?'Reprendre':'Pause';$('#dcard').classList.toggle('paused',pause);if(pause){clearTimeout(timer);reste=Math.max(400,dur-(Date.now()-debut));$('#dbar').style.transition='none';$('#dbar').style.width=(100*(Date.now()-debut)/dur)+'%';}else{lancerTimer(reste);}};
+    window.addEventListener('scroll',repos,{passive:true});window.addEventListener('resize',repos);
+    document.addEventListener('keydown',clav);
+  }
+  function clav(e){if(!actif)return;if(e.key==='Escape')stop();else if(e.key==='ArrowRight')aller(i+1);else if(e.key==='ArrowLeft')aller(i-1);else if(e.key===' '){e.preventDefault();$('#dpause').click();}}
+  let cible=null,pointe=null;
+  function repos(){
+    if(!actif||!cible)return;const s=$('#dspot');if(!s)return;
+    const r=cible.getBoundingClientRect(),m=8;
+    s.style.top=(r.top-m)+'px';s.style.left=(r.left-m)+'px';s.style.width=(r.width+2*m)+'px';s.style.height=(r.height+2*m)+'px';
+    if(pointe){const q=pointe.getBoundingClientRect();$('#dcur').style.transform=`translate(${q.left+q.width*.55}px,${q.top+q.height*.6}px)`;}
+  }
+  async function viser(sel,pt){
+    cible=null;pointe=null;
+    let el=null;for(const s of (sel||'').split(',')){el=$(s.trim());if(el)break;}
+    if(!el)return;
+    try{el.scrollIntoView({block:'center',behavior:_reduit()?'auto':'smooth'});}catch(e){}
+    await dodo(_reduit()?0:420);
+    cible=el;pointe=null;
+    if(pt)for(const s of pt.split(',')){const p=$(s.trim());if(p){pointe=p;break;}}
+    if(!pointe)pointe=el;
+    const sp=$('#dspot');sp.style.opacity='1';repos();
+    const c=$('#dcur');c.style.opacity='1';
+  }
+  async function clicVisuel(){const c=$('#dcur');if(!c)return;c.classList.add('clk');await dodo(260);c.classList.remove('clk');}
+  async function taper(sel,txt,go){
+    const el=$(sel);if(!el)return;if(window.innerWidth>700)try{el.focus();}catch(e){}el.value='';
+    for(let k=1;k<=txt.length;k++){el.value=txt.slice(0,k);el.dispatchEvent(new Event('input',{bubbles:true}));await dodo(_reduit()?0:70+Math.random()*60);}
+    if(sel==='#q'){q=txt;renderListe();}
+    if(go){await dodo(300);const b=$('#ago');if(b){await clicVisuel();b.click();}}
+    await dodo(_reduit()?0:450);
+  }
+  function lancerTimer(ms){
+    clearTimeout(timer);dur=ms;debut=Date.now();
+    const b=$('#dbar');b.style.transition='none';b.style.width='0%';void b.offsetWidth;b.style.transition='width '+ms+'ms linear';b.style.width='100%';
+    timer=setTimeout(()=>{if(!pause)aller(i+1);},ms);
+  }
+  async function aller(n){
+    const t=++tok;clearTimeout(timer);pause=false;const pb=$('#dpause');if(pb)pb.textContent='Pause';
+    if(n<0)n=0;
+    if(n>=SCENES.length){stop(true);return;}
+    i=n;const sc=SCENES[n];
+    const sp=$('#dspot'),c=$('#dcur');sp.style.opacity='0';c.style.opacity='0';cible=null;
+    closeModal();closeDrawer();closeAssist();closeElig();
+    if(sc.clear){q='';fSect='';fTerr='';fStat='';fSrc='';fEnr='';fFiche='';fType='';fVisee='';fChauf='';fAnn='';fZone='Métropole';pageN=60;}
+    if(view!==sc.v){view=sc.v;render();await renderPret();}
+    else if(sc.clear){render();await renderPret();}
+    if(t!==tok)return;
+    if(sc.open==='fiche'){const f=filtrer()[0]||fiches[0];if(f)detail(f.id);}
+    else if(sc.open==='nouveau')formClient();
+    else if(sc.open==='menu')openDrawer();
+    else if(sc.open==='assist')openAssist();
+    if(sc.open)await dodo(_reduit()?0:380);
+    if(t!==tok)return;
+    if(sc.type){await viser(sc.type.sel,sc.type.sel);await taper(sc.type.sel,sc.type.txt,sc.type.go);if(t!==tok)return;}
+    if(sc.clear){q='';renderListe();fChauf='fioul';renderListe();await dodo(200);}
+    await viser(sc.sel,sc.pt);if(t!==tok)return;
+    if(sc.clic)await clicVisuel();
+    const card=$('#dcard');card.classList.remove('in');void card.offsetWidth;card.classList.add('in');
+    $('#dnum').textContent=(n+1)+' / '+SCENES.length;$('#dt').textContent=sc.t;$('#dp').textContent=sc.p;
+    $('#dprev').style.visibility=n?'visible':'hidden';$('#dnext').textContent=sc.fin?'Terminer':'Suivant ›';
+    lancerTimer(sc.d);
+  }
+  function start(){
+    if(actif)return;if(typeof tourI!=='undefined'&&tourI>=0)tourStep(-1);actif=true;ui();document.body.classList.add('demo-on');closeModal();closeDrawer();closeAssist();closeElig();
+    $('#demoui').style.display='';aller(0);
+  }
+  function stop(fin){
+    if(!actif)return;actif=false;clearTimeout(timer);tok++;cible=null;
+    const u=$('#demoui');if(u)u.style.display='none';document.body.classList.remove('demo-on');
+    closeModal();closeDrawer();closeAssist();closeElig();
+    q='';fSect='';fTerr='';fStat='';fSrc='';fEnr='';fFiche='';fType='';fVisee='';fChauf='';fAnn='';fZone='Métropole';pageN=60;
+    view='tableau';render();
+    if(fin)toast('Fin de la démo. Pense bien, tout ira bien.');
+  }
+  return{start,stop,actif:()=>actif};
+})();
+
+function startTour(){if(Demo.actif())return;tourStep(0);}
 document.getElementById('hlogo').src=LOGO_SMALL;
 document.getElementById('hlogo').style.cursor='pointer';document.getElementById('hlogo').onclick=()=>{view='tableau';render();};
 const _lg=document.getElementById('hlogotxt');if(_lg){_lg.style.cursor='pointer';_lg.onclick=()=>{view='tableau';render();};}
@@ -1881,7 +2269,7 @@ document.getElementById('bMenu').onclick=openDrawer;
 document.getElementById('bNew').onclick=formClient;
 document.getElementById('bAssist').onclick=openAssist;
 document.getElementById('bOut').onclick=async()=>{user=null;try{await Store.del(KS);}catch(e){}gateOut();};
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(tourI>=0)tourStep(-1);else{closeModal();closeDrawer();closeAssist();}}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!Demo.actif()){if(tourI>=0)tourStep(-1);else{closeModal();closeDrawer();closeAssist();closeElig();}}});
 (async()=>{
   let s=null;try{s=await Store.get(KS);}catch(e){}
   const connu=s&&ACCES.find(a=>a.login===s.login);
